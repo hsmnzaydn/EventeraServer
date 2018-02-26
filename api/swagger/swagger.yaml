@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Hello World App
 # during dev, should point to your local machine
-host: localhost:10010
+host: localhost:8080
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -17,44 +17,135 @@ consumes:
 # format of the responses to the client (Accepts)
 produces:
   - application/json
+  
+tags:
+- name: "Start Application"
+  description: "Start Application"
+- name: "Register"
+  description: "Register services"
+
 paths:
-  /hello:
+
+  /api/secure/startApplication:
     # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: StartApplication
     get:
-      description: Returns 'Hello' to the caller
+      tags:
+       - "Start Application"
+      description: Return
       # used as the method name of the controller
-      operationId: hello
+      operationId: startApplication
       parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
+        - name: udid
+          in: header
+          description: User's udid
+          required: true
+          type: string
+        - name: Authorization
+          in: header
+          description: User's authorization
+          required: true
           type: string
       responses:
         "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/CommonResponse"
+  /api/registration/validateId:
+   x-swagger-router-controller: Register
+   post:
+     tags:
+      - "Register"
+     operationId: registerUser
+     description: User register service
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        required: true
+        type: string
+      - name: registerObject
+        in: body
+        required: true
+        schema:
+         $ref: "#/definitions/RegisterObject"
+     responses:
+       "200":
+         description: OK
+         schema:
+          $ref: "#/definitions/RegisterResponse"
+           
+   
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+
+
+
+  CommonResponse:
     required:
+      - code
       - message
     properties:
+      code:
+       type: number
       message:
         type: string
-  ErrorResponse:
-    required:
-      - message
+        
+        
+  RegisterResponse:
+   required:
+    - code
+    - message
+   properties:
+    code:
+     type: number
+    message:
+     type: string
+    secret:
+     type: string
+     
+     
+     
+  RegisterObject:
     properties:
-      message:
-        type: string
+     sex:
+      enum: ["MALE","FEMALE"]
+      type: string 
+     mail:
+      type: string
+     age:
+      type: number
+     job:
+      type: string
+     adress:
+      type: string
+     interests:
+      type: array
+      items:
+       $ref: "#/definitions/Interests"
+       
+  
+  Interests:
+   properties:
+    name:
+     type: string
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
