@@ -8,6 +8,7 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "csv-reader": "^1.0.1",
     "express": "^4.12.3",
     "mongoose": "^5.0.7",
     "nodemon": "^1.15.1",

@@ -23,6 +23,8 @@ tags:
   description: "Start Application"
 - name: "Register"
   description: "Register services"
+- name: "Event"
+  description: "Events' services"
 
 paths:
 
@@ -76,7 +78,24 @@ paths:
          schema:
           $ref: "#/definitions/RegisterResponse"
            
-   
+  /api/secure/events:
+    x-swagger-router-controller: Event
+    get:
+     tags:
+      - "Event"
+     operationId: getAllEvent
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+     responses:
+      "200":
+       description: response
+       schema:
+        type: array
+        items:
+         $ref: "#/definitions/Event"
 
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -135,7 +154,23 @@ definitions:
      type: string
   
   
-  
+  Event:
+   properties:
+    id:
+     type: string
+    name:
+     type: string
+    description:
+     type: string
+    startTime:
+     type: string
+    endTime:
+     type: string
+    categoryName:
+     type: string
+    location:
+     type: string
+    
   
   
   

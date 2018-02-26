@@ -1,8 +1,15 @@
 var kullanici=require('../mocks/models/User')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
+var etkinlik= require('../mocks/models/Event')
+
 
 module.exports = {registerUser};
+
+
+function getEventsCategories(req, res, next){
+    
+}
 
 
 function registerUser(req, res, next) {
