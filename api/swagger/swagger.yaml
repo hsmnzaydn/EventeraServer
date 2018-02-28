@@ -46,7 +46,7 @@ paths:
         - name: Authorization
           in: header
           description: User's authorization
-          required: true
+          required: false
           type: string
       responses:
         "200":

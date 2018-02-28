@@ -9,11 +9,10 @@ module.exports = {startApplication};
 
 function startApplication(req, res, next) {
     var udid= req.headers['udid']
-    var authorizationKey= req.headers['Authorization']
+    var authorizationKeyOfUser= req.headers['authorization']
+        
     
-
-    user.find({udid: udid}, function(err,mongoUser){
-
+    user.find({udid: udid, _id:authorizationKeyOfUser}, function(err,mongoUser){
         if(err) {
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                 res.status(callback.code)
@@ -32,5 +31,4 @@ function startApplication(req, res, next) {
             });
         }
     })
-
 }
