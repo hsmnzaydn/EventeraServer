@@ -5,8 +5,8 @@ var mongoDB= 'mongodb://localhost/NodeProje';
 
 mongo.connect(mongoDB,function (err1,err2) {
     if(err1){
-        console.log("mongoose hatası: "+err.log)
+        console.log("Database connect error: "+err1.log)
     }else {
-        console.log("mongose bağlandı",mongoDB)
+        console.log("Connected to database",mongoDB)
     }
 })

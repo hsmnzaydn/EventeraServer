@@ -89,6 +89,11 @@ paths:
         in: header
         description: User's udid
         type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string  
      responses:
       "200":
        description: response
@@ -96,6 +101,32 @@ paths:
         type: array
         items:
          $ref: "#/definitions/Event"
+  
+  /api/secure/events/userEvents:
+    
+    x-swagger-router-controller: Event
+    get:
+     tags:
+      - "Event"
+     operationId: getSpecificEventList
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+     responses:
+      "200":
+       description: response
+       schema:
+        type: array
+        items:
+         $ref: "#/definitions/Event"
+   
 
   /swagger:
     x-swagger-pipe: swagger_raw

@@ -4,8 +4,6 @@ var event=require('../mocks/models/Event')
 var fs = require('fs');
 var CsvReadableStream = require('csv-reader');
 
-module.exports.readCsv=function(){
-
     var inputStream = fs.createReadStream('/mnt/b13f905b-331a-4dc7-832a-febbb0b6a009/Projelerim/BitirmeProjesi/PythonScript/datasets.csv', 'utf8');
 
     inputStream
@@ -23,13 +21,18 @@ module.exports.readCsv=function(){
             })
             
             etkinlik.save(function(err) {
-                if (err) throw err;
+                if (err) {
+                    jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback)
+                    });
+                }
                 
             });
             
         })
         .on('end', function (data) {
-            console.log('No more rows!');
+            console.log("It has been finished the save to database")
         });
-}
+
 

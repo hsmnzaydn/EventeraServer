@@ -27,7 +27,12 @@ function registerUser(req, res, next) {
     })
 
     user.save(function(err,user) {
-        if (err) throw err;
+        if (err) {
+            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            });
+        }
         jsonCreator.registerResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,user._id,function(callback){
             res.status(callback.code)
             res.send(callback)
