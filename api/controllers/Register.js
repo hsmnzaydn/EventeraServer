@@ -2,13 +2,40 @@ var kullanici=require('../mocks/models/User')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 var etkinlik= require('../mocks/models/Event')
+var category=require('../mocks/models/Category')
 
 
-module.exports = {registerUser};
+module.exports = {registerUser,getEventsCategories};
+//module.exports = {getEventsCategories};
+
 
 
 function getEventsCategories(req, res, next){
+    res.json([{
+           
+        "cId" : "12",
+            "cName" : "üsame"
     
+      },{
+           
+        "cId" : "13",
+            "cName" : "enes"
+    
+      }])
+     /* category.find(function(err,results){
+        if(err) {
+            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            });
+        }else{
+            jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                console.log(results);
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify(results));
+            });
+        }
+      })*/
 }
 
 

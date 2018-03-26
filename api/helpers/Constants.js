@@ -10,16 +10,6 @@ module.exports.ERROR_MESSAGE="Unexpected error";
 module.exports.VERSION_UPDATE_CODE=450;
 module.exports.VERSION_UPDATE_MESSAGE="New version available";
 
-module.exports.SEND_OTP_CODE=456;
-module.exports.SEND_OTP_MESSAGE="Already send otp code";
-
-module.exports.MAX_OTP_TRY_CODE=457;
-module.exports.MAX_OTP_TRY_MESSAGE="Max otp tryed";
-
-
-
-module.exports.OTP_WRONG_CODE=458;
-module.exports.OTP_WRONG_MESSAGE="Otp wrong";
 
 module.exports.UNREGISTER_CODE=451;
 module.exports.UNREGISTER_MESSAGE="This user is not register";

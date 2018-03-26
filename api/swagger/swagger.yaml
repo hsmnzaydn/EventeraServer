@@ -25,9 +25,26 @@ tags:
   description: "Register services"
 - name: "Event"
   description: "Events' services"
+- name: "Catagories"
+  description: "Catagories' services"
 
 paths:
 
+  /api/events/categories:
+    x-swagger-router-controller: Register
+    get:
+      tags:
+      - "Catagories"
+      description: Return
+      operationId: getEventsCategories
+      responses:
+        "200":
+          description: response
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Category"
+  
   /api/secure/startApplication:
     # binds a127 app logic to a route
     x-swagger-router-controller: StartApplication
@@ -100,6 +117,8 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
+
+
 definitions:
 
 
@@ -171,7 +190,14 @@ definitions:
     location:
      type: string
     
-  
+    
+  Category:
+   properties:
+    cId:
+     type : string
+    cName: 
+      type: string 
+    
   
   
   
