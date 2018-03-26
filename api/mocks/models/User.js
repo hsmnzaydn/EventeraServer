@@ -9,7 +9,7 @@ var kullanici=new Schema(
         job: String,
         sex: String,
         location: String,
-        age: Number,
+        age: String,
         mail: String,
         interesting: {type: Array},
         attendes: {type: Array}

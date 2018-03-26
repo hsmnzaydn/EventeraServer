@@ -14,6 +14,7 @@ function getEventsCategories(req, res, next){
 
 function registerUser(req, res, next) {
     var udid= req.headers['udid']
+    console.log(udid)
     var user= new kullanici({
         name: req.body['name'],
         udid: req.headers['udid'],

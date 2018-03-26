@@ -54,6 +54,7 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/CommonResponse"
+            
   /api/registration/validateId:
    x-swagger-router-controller: Register
    post:
@@ -168,7 +169,7 @@ definitions:
      mail:
       type: string
      age:
-      type: number
+      type: string
      job:
       type: string
      adress:
