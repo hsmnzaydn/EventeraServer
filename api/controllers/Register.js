@@ -2,7 +2,7 @@ var kullanici=require('../mocks/models/User')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 var etkinlik= require('../mocks/models/Event')
-//var category=require('../mocks/models/Category')
+var category=require('../mocks/models/Category')
 
 
 module.exports = {registerUser,getEventsCategories};
@@ -13,13 +13,73 @@ module.exports = {registerUser,getEventsCategories};
 function getEventsCategories(req, res, next){
     res.json([{
            
-        "cId" : "12",
-            "cName" : "üsame"
+        "categoryId" : "1",
+            "cName" : "Business"
     
       },{
            
-        "cId" : "13",
-            "cName" : "enes"
+        "categoryId" : "2",
+            "cName" : "Sport & Fitness"
+    
+      },{
+           
+        "categoryId" : "3",
+            "cName" : "Hobbies"
+    
+      },{
+           
+        "categoryId" : "4",
+            "cName" : "Travel & Outdoor"
+    
+      },{
+           
+        "categoryId" : "5",
+            "cName" : "Film & Media"
+    
+      },{
+           
+        "categoryId" : "6",
+            "cName" : "Home & Lifestyle"
+    
+      },{
+           
+        "categoryId" : "7",
+            "cName" : "Science & Tech"
+    
+      },{
+           
+        "categoryId" : "8",
+            "cName" : "Fashion"
+    
+      },{
+           
+        "categoryId" : "9",
+            "cName" : "Health"
+    
+      },{
+           
+        "categoryId" : "10",
+            "cName" : "Community"
+    
+      },{
+           
+        "categoryId" : "11",
+            "cName" : "Family & Education"
+    
+      },{
+           
+        "categoryId" : "12",
+            "cName" : "Spirituality"
+    
+      },{
+           
+        "categoryId" : "13",
+            "cName" : "Arts"
+    
+      },{
+           
+        "categoryId" : "14",
+            "cName" : "Others"
     
       }])
      /* category.find(function(err,results){

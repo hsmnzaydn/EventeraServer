@@ -106,6 +106,17 @@ paths:
       - "Event"
       description: Return
       operationId: getEventsCategories
+      parameters:
+        - name: udid
+          in: header
+          description: User's udid
+          required: true
+          type: string
+        - name: Authorization
+          in: header
+          description: User's authorization
+          required: false
+          type: string
       responses:
         "200":
           description: response
