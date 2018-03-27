@@ -112,7 +112,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Category"       
+              $ref: "#/definitions/Interests"       
 
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -169,6 +169,8 @@ definitions:
   
   Interests:
    properties:
+    id:
+     type: string
     name:
      type: string
   
@@ -191,12 +193,7 @@ definitions:
      type: string
     
     
-  Category:
-   properties:
-    categoryId:
-     type : string
-    categoryName: 
-      type: string 
+   
     
   
   

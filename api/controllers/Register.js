@@ -13,13 +13,13 @@ module.exports = {registerUser,getEventsCategories};
 function getEventsCategories(req, res, next){
     res.json([{
            
-        "cId" : "12",
-            "cName" : "üsame"
+        "interestId" : "12",
+            "intesrestName" : "üsame"
     
       },{
            
-        "cId" : "13",
-            "cName" : "enes"
+        "interestId" : "13",
+            "intesrestName" : "enes"
     
       }])
      /* category.find(function(err,results){
