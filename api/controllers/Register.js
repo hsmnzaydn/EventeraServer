@@ -2,7 +2,7 @@ var kullanici=require('../mocks/models/User')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 var etkinlik= require('../mocks/models/Event')
-//var category=require('../mocks/models/Category')
+var category=require('../mocks/models/Category')
 
 
 module.exports = {registerUser,getEventsCategories};
@@ -13,13 +13,73 @@ module.exports = {registerUser,getEventsCategories};
 function getEventsCategories(req, res, next){
     res.json([{
            
+        "interestId" : "1",
+            "intesrestName" : "Business"
+    
+      },{
+           
+        "interestId" : "2",
+            "intesrestName" : "Sport & Fitness"
+    
+      },{
+           
+        "interestId" : "3",
+            "intesrestName" : "Hobbies"
+    
+      },{
+           
+        "interestId" : "4",
+            "intesrestName" : "Travel & Outdoor"
+    
+      },{
+           
+        "interestId" : "5",
+            "intesrestName" : "Film & Media"
+    
+      },{
+           
+        "interestId" : "6",
+            "intesrestName" : "Home & Lifestyle"
+    
+      },{
+           
+        "interestId" : "7",
+            "intesrestName" : "Science & Tech"
+    
+      },{
+           
+        "interestId" : "8",
+            "intesrestName" : "Fashion"
+    
+      },{
+           
+        "interestId" : "9",
+            "intesrestName" : "Health"
+    
+      },{
+           
+        "interestId" : "10",
+            "intesrestName" : "Community"
+    
+      },{
+           
+        "interestId" : "11",
+            "intesrestName" : "Family & Education"
+    
+      },{
+           
         "interestId" : "12",
-            "intesrestName" : "üsame"
+            "intesrestName" : "Spirituality"
     
       },{
            
         "interestId" : "13",
-            "intesrestName" : "enes"
+            "intesrestName" : "Arts"
+    
+      },{
+           
+        "interestId" : "14",
+            "intesrestName" : "Others"
     
       }])
      /* category.find(function(err,results){

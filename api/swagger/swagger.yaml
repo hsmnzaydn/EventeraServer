@@ -79,6 +79,32 @@ paths:
          description: OK
          schema:
           $ref: "#/definitions/RegisterResponse"
+          
+  /api/registration/categories:
+    x-swagger-router-controller: Register
+    get:
+      tags:
+      - "Register"
+      description: Return
+      operationId: getEventsCategories
+      parameters:
+        - name: udid
+          in: header
+          description: User's udid
+          required: true
+          type: string
+        - name: Authorization
+          in: header
+          description: User's authorization
+          required: false
+          type: string
+      responses:
+        "200":
+          description: response
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Interests"        
            
   /api/secure/events:
     x-swagger-router-controller: Event
@@ -99,20 +125,7 @@ paths:
         items:
          $ref: "#/definitions/Event"
          
-  /api/events/categories:
-    x-swagger-router-controller: Register
-    get:
-      tags:
-      - "Event"
-      description: Return
-      operationId: getEventsCategories
-      responses:
-        "200":
-          description: response
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Interests"       
+         
 
   /swagger:
     x-swagger-pipe: swagger_raw
