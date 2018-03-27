@@ -28,6 +28,8 @@ tags:
 
 paths:
 
+  
+  
   /api/secure/startApplication:
     # binds a127 app logic to a route
     x-swagger-router-controller: StartApplication
@@ -54,7 +56,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/CommonResponse"
-            
   /api/registration/validateId:
    x-swagger-router-controller: Register
    post:
@@ -90,11 +91,6 @@ paths:
         in: header
         description: User's udid
         type: string
-      - name: Authorization
-        in: header
-        description: User's authorization
-        required: false
-        type: string  
      responses:
       "200":
        description: response
@@ -102,36 +98,27 @@ paths:
         type: array
         items:
          $ref: "#/definitions/Event"
-  
-  /api/secure/events/userEvents:
-    
-    x-swagger-router-controller: Event
+         
+  /api/events/categories:
+    x-swagger-router-controller: Register
     get:
-     tags:
+      tags:
       - "Event"
-     operationId: getSpecificEventList
-     parameters:
-      - name: udid
-        in: header
-        description: User's udid
-        type: string
-      - name: Authorization
-        in: header
-        description: User's authorization
-        required: false
-        type: string
-     responses:
-      "200":
-       description: response
-       schema:
-        type: array
-        items:
-         $ref: "#/definitions/Event"
-   
+      description: Return
+      operationId: getEventsCategories
+      responses:
+        "200":
+          description: response
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Category"       
 
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
+
+
 definitions:
 
 
@@ -203,7 +190,14 @@ definitions:
     location:
      type: string
     
-  
+    
+  Category:
+   properties:
+    categoryId:
+     type : string
+    categoryName: 
+      type: string 
+    
   
   
   
