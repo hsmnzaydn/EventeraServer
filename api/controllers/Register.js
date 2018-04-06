@@ -6,8 +6,6 @@ var category=require('../mocks/models/Category')
 
 
 module.exports = {registerUser,getEventsCategories};
-//module.exports = {getEventsCategories};
-
 
 
 function getEventsCategories(req, res, next){

@@ -4,7 +4,7 @@ var event=require('../mocks/models/Event')
 var fs = require('fs');
 var CsvReadableStream = require('csv-reader');
 
-    var inputStream = fs.createReadStream('/mnt/b13f905b-331a-4dc7-832a-febbb0b6a009/Projelerim/BitirmeProjesi/PythonScript/datasets.csv', 'utf8');
+    var inputStream = fs.createReadStream('/opt/EventeraPython/datasets.csv', 'utf8');
 
     inputStream
         .pipe(CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))

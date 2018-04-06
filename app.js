@@ -3,7 +3,7 @@
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
 var db= require('./api/mocks/db')
-//var readCsv= require('./api/helpers/ReadCsvFile')
+var readCsv= require('./api/helpers/ReadCsvFile')
 module.exports = app; // for testing
 
 
