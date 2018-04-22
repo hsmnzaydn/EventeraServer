@@ -1,32 +1,43 @@
+
 var kullanici=require('../mocks/models/User')
 var etkinlik= require('../mocks/models/Event')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 
-module.exports = {getEvents,getSpecificEventList};
+module.exports = {attendEvent,getSpecificEventList};
 
-function getEvents(req, res, next) {
-    var udid= req.headers['udid']
+function attendEvent(req,res,next){
+    var id = req.swagger.params.id.value
+    var udid = req.headers['udid']
     var authorizationKeyOfUser= req.headers['authorization']
-    user.find({udid: udid, _id:authorizationKeyOfUser}, function(err,mongoUser){
-        console.log(mongoUser)
-        if(err) {
-            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                res.status(callback.code)
-                res.send(callback)
-            });
-        }
-        if(mongoUser.length == 0){
-            jsonCreator.commonResponseCreator(Constants.UNREGISTER_CODE,Constants.UNREGISTER_MESSAGE,function(callback){
-                res.status(callback.code)
-                res.send(callback)
-            });
-        }else{
-        }
-
-    })
     
+    kullanici.findById({_id:authorizationKeyOfUser , udid: udid},function(err,mongoUser){
+
+        etkinlik.findById({_id:id},function(err,event){
+            
+            mongoUser.attendes.push(event)
+            
+            mongoUser.save(function(err) {
+                if(err){
+                    jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback.message)
+                    })
+                }
+                else{
+                    jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback)
+                    })
+                }
+            });
+            
+        })
+    })
 }
+
+
+
 
 
 function getSpecificEventList(req,res,next){

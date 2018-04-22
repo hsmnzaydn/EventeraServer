@@ -21,3 +21,5 @@ module.exports.registerResponseCreator= function(code,message,secret,callback){
 
     callback(response);
 }
+
+
