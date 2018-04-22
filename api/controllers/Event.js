@@ -3,22 +3,28 @@ var etkinlik= require('../mocks/models/Event')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 
-module.exports = {getAllEvent,getSpecificEventList};
+module.exports = {getEvents,getSpecificEventList};
 
-function getAllEvent(req, res, next) {
-
-    etkinlik.find({},function(err,events){
+function getEvents(req, res, next) {
+    var udid= req.headers['udid']
+    var authorizationKeyOfUser= req.headers['authorization']
+    user.find({udid: udid, _id:authorizationKeyOfUser}, function(err,mongoUser){
+        console.log(mongoUser)
         if(err) {
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                 res.status(callback.code)
                 res.send(callback)
             });
         }
-        else{
-            res.status(Constants.OK_CODE)
-            res.json(events)        
+        if(mongoUser.length == 0){
+            jsonCreator.commonResponseCreator(Constants.UNREGISTER_CODE,Constants.UNREGISTER_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            });
+        }else{
         }
-        })
+
+    })
     
 }
 
