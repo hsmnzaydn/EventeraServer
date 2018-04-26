@@ -164,7 +164,7 @@ paths:
     post:
      tags:
       - "Event"
-     operationId: addWallEntry
+     operationId: wallEntryAdd
      parameters:
       - name: udid
         in: header
@@ -281,6 +281,8 @@ definitions:
    properties:
     text:
      type: string
+   
+  
    
     
   

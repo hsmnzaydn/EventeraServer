@@ -3,8 +3,9 @@ var kullanici=require('../mocks/models/User')
 var etkinlik= require('../mocks/models/Event')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
+var WallEntry=require('../mocks/models/WallEntry')
 
-module.exports = {attendEvent,getSpecificEventList};
+module.exports = {wallEntryAdd,attendEvent,getSpecificEventList};
 
 function attendEvent(req,res,next){
     var id = req.swagger.params.id.value
@@ -36,6 +37,47 @@ function attendEvent(req,res,next){
     })
 }
 
+
+function wallEntryAdd(req,res,next){
+    var udid=req.headers['udid']
+    var authorizationKeyOfUser= req.headers['authorization']
+    var id = req.swagger.params.id.value
+    var wallEntry= new WallEntry({
+        content: req.body['text'],
+        likeCount: 0
+    })
+
+    etkinlik.findById({_id:id},function(err,event){
+        if(err){
+            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            })
+        }else{
+            event.wallEntryList.push(wallEntry)
+            event.save(function(err){
+                if(err){
+                    jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback)
+                    })
+                }
+                else{
+                    jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback)
+                    })
+                }
+            })
+        }
+
+       
+
+    })
+
+
+
+}
 
 
 

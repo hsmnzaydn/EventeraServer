@@ -2,12 +2,7 @@ var mongoose=require("mongoose");
 
 var Schema=mongoose.Schema;
 
-var wallEntry = new Schema(
-    {
-        text: String,
-         
-    }
-);
+
 var event=new Schema(
     {
         eventName: String,
@@ -16,7 +11,7 @@ var event=new Schema(
         eventEndTime:String,
         eventCategoryName: String,
         eventLocation: String,
-        wallEntryList: {type: Array, type: wallEntry }
+        wallEntryList: Array
         
     }
 
