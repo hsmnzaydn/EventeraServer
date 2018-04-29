@@ -25,7 +25,8 @@ tags:
   description: "Register services"
 - name: "Event"
   description: "Events' services"
-
+- name: "Wall Entry"
+  description: "Wall Entry services"
 paths:
 
   
@@ -194,8 +195,110 @@ paths:
             
             
        
+  /api/secure/events/{eventId}/wallEntry/{wallEntryId}:
     
+    x-swagger-router-controller: WallEntry
+    get:
+     tags:
+      - "Wall Entry"
+     operationId: likeWallEntry
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: eventId
+        in: path
+        type: string
+        required: true
+        description: Event id
+      - name: wallEntryId
+        in: path
+        type: string
+        required: true
       
+     responses:
+      "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CommonResponse"
+    
+  /api/secure/events/{eventId}/wallEntry/{wallEntryId}/comments:
+    
+    
+    x-swagger-router-controller: WallEntry
+    post:
+     tags:
+      - "Wall Entry"
+     operationId: postComment
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: eventId
+        in: path
+        type: string
+        required: true
+        description: Event id
+      - name: wallEntryId
+        in: path
+        type: string
+        required: true
+      - name: comment
+        in: body
+        description: Comment object
+        required: true
+        schema:
+         $ref: "#/definitions/Comment"
+     responses:
+      "200":
+       description: Success
+       schema:
+         $ref: "#/definitions/CommonResponse"
+        
+    
+    get:
+     tags:
+      - "Wall Entry"
+     operationId: getComment
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: eventId
+        in: path
+        type: string
+        required: true
+        description: Event id
+      - name: wallEntryId
+        in: path
+        type: string
+        required: true
+     responses:
+      "200":
+          description: Success
+          schema:
+            type: array
+            items:
+             $ref: "#/definitions/Comment"          
   
 
   /swagger:
@@ -283,7 +386,14 @@ definitions:
      type: string
    
   
-   
+  Comment:
+    properties:
+     text:
+      type: string
+     postedBy:
+      type: string
+     id: 
+      type: string
     
   
   

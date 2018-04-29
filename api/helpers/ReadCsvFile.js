@@ -1,6 +1,6 @@
 
 var event=require('../mocks/models/Event')
-
+var jsonCreator=require('../helpers/JsonCreator')
 var fs = require('fs');
 var CsvReadableStream = require('csv-reader');
 
