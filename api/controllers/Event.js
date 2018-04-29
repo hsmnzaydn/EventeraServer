@@ -1,11 +1,13 @@
 
 var kullanici=require('../mocks/models/User')
-var etkinlik= require('../mocks/models/Event')
+var etkinlik=require('../mocks/models/Event')
 var jsonCreator= require('../helpers/JsonCreator')
 var Constants=require('../helpers/Constants')
 var WallEntrySchema= require('../mocks/models/WallEntrySchema')
 
-module.exports = {wallEntryAdd,attendEvent,getSpecificEventList};
+
+
+module.exports = {wallEntryAdd,attendEvent,getWallEntries};
 
 function attendEvent(req,res,next){
     var id = req.swagger.params.id.value
@@ -22,7 +24,7 @@ function attendEvent(req,res,next){
                 if(err){
                     jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                         res.status(callback.code)
-                        res.send(callback.message)
+                        res.send(callback)
                     })
                 }
                 else{
@@ -39,64 +41,96 @@ function attendEvent(req,res,next){
 
 
 function wallEntryAdd(req,res,next){
-    var udid=req.headers['udid']
+   var udid=req.headers['udid']
     var authorizationKeyOfUser= req.headers['authorization']
     var id = req.swagger.params.id.value
-    var wallEntry= new WallEntrySchema({
-        text: req.body['text']
+
+
+    etkinlik.findById({_id:id},function(err,event){
+
+        if(err){
+            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            })
+        }else{
+            kullanici.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+                if(err){
+                    jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                        res.status(callback.code)
+                        res.send(callback)
+                    })
+                }
+                else{
+                    var wallEntry= new WallEntrySchema({
+                        postedBy:user,
+                        text: req.body['text']
+                        }
+                    )
+                    console.log(wallEntry)
+
+                    event.wallEntryList.push(wallEntry)
+
+                    event.save(function(err){
+                        if(err){
+                            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                                res.status(callback.code)
+                                res.send(callback)
+                            })
+                        }else{
+                            jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                                res.status(callback.code)
+                                res.send(callback)
+                            })
+                        }
+                    })
+
+
+                }  
+            })
         }
-    )
+
+        
+
+
+
+    })
+
 
 
 
 }
 
 
-
-
-
-
-function getSpecificEventList(req,res,next){
-    var udid= req.headers['udid']
+function getWallEntries(req,res,next){
+    var udid=req.headers['udid']
     var authorizationKeyOfUser= req.headers['authorization']
-        
-    var listOfEventName=[]
-    var listOfEvent=[]
-    kullanici.find({udid: udid, _id:authorizationKeyOfUser}, function(err,mongoUser){
-       if(err) {
+    var id = req.swagger.params.eventId.value
+
+    etkinlik.findOne({_id:id},function(err,event){
+        if(err){
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                 res.status(callback.code)
                 res.send(callback)
-            });
-        }
-        if(mongoUser.length != 0){
-            listOfEventName=mongoUser[0].interesting
-            
-            for(let i=0; i<listOfEventName; i++){
-                etkinlik.find({eventName:listOfEventName[i]},function(err,eventList){
-                    console.log("EventName: "+ listOfEventName[i])
-                    console.log("EventList: "+ eventList)
-                    console.log(listOfEvent)
-                    console.log("*****************************************\n")
-                    if(err) {
-                        jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                            res.status(callback.code)
-                            res.send(callback)
-                        });
-                    }
-                    if(eventList.length != 0){
-                        listOfEvent.push(eventList)
-                    }
-                })
-            }
-
+            })
+        }else{
+           res.status(Constants.OK_CODE)
+           res.send(event.wallEntryList)
         }
 
     })
 
-    
-    
+ 
+
+
 }
+
+
+
+
+
+
+
 
 
 

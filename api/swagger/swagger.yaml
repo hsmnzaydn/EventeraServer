@@ -194,14 +194,14 @@ paths:
             $ref: "#/definitions/CommonResponse"        
             
             
-       
-  /api/secure/events/{eventId}/wallEntry/{wallEntryId}:
-    
-    x-swagger-router-controller: WallEntry
+  
+  /api/secure/events/{eventId}/wallEntries:
+  
+    x-swagger-router-controller: Event
     get:
      tags:
-      - "Wall Entry"
-     operationId: likeWallEntry
+      - "Event"
+     operationId: getWallEntries
      parameters:
       - name: udid
         in: header
@@ -217,22 +217,20 @@ paths:
         type: string
         required: true
         description: Event id
-      - name: wallEntryId
-        in: path
-        type: string
-        required: true
-      
      responses:
       "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/CommonResponse"
+            $ref: "#/definitions/WallEntry"
+   
+       
+  
     
   /api/secure/events/{eventId}/wallEntry/{wallEntryId}/comments:
     
     
-    x-swagger-router-controller: WallEntry
+    x-swagger-router-controller: WallEntryService
     post:
      tags:
       - "Wall Entry"
@@ -384,15 +382,14 @@ definitions:
    properties:
     text:
      type: string
+    user:
+     $ref : "#/definitions/RegisterObject"
+   
    
   
   Comment:
     properties:
      text:
-      type: string
-     postedBy:
-      type: string
-     id: 
       type: string
     
   

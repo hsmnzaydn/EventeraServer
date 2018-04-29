@@ -17,10 +17,7 @@ var event=new Schema(
         eventCategoryName: String,
         eventLocation: String,
         wallEntryList: [
-            {
-               wallEntry:  {type: mongoose.Schema.Types.ObjectId, ref: 'wallEntry'} 
-                
-            }
+            
         ]
         
     }
