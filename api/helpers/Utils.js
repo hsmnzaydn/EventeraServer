@@ -1,0 +1,13 @@
+
+
+module.exports.searchInArray= function(valueKey,arrayList,callback){
+    var object=new Object();
+    for(var index=0;index<arrayList.length;index++){
+
+        if(arrayList[index]._id == valueKey){
+            object.list=arrayList[index]
+            object.index=index
+                callback(object)
+        }
+    }
+}
