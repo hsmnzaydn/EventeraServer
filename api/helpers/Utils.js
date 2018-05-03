@@ -7,7 +7,19 @@ module.exports.searchInArray= function(valueKey,arrayList,callback){
         if(arrayList[index]._id == valueKey){
             object.list=arrayList[index]
             object.index=index
-                callback(object)
+             callback(object)
         }
     }
+}
+
+
+module.exports.setNullObjectInArray= function(arrayList,callback){
+
+    arrayList.forEach(element => {
+        element.wallEntryList=null
+    },function(){
+        callback.List=arrayList;
+    });
+
+
 }

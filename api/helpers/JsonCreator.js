@@ -1,5 +1,5 @@
 
-
+var Constant= require('./Constants')
 
 
 module.exports.commonResponseCreator = function (code, message, callback) {
@@ -21,5 +21,17 @@ module.exports.registerResponseCreator= function(code,message,secret,callback){
 
     callback(response);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

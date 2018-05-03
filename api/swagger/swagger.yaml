@@ -113,7 +113,7 @@ paths:
     get:
      tags:
       - "Event"
-     operationId: getSpecificEventList
+     operationId: getEventList
      parameters:
       - name: udid
         in: header
@@ -161,7 +161,8 @@ paths:
             # a pointer to a definition
             $ref: "#/definitions/CommonResponse"
             
-            
+  
+   
     post:
      tags:
       - "Event"
@@ -193,7 +194,34 @@ paths:
             # a pointer to a definition
             $ref: "#/definitions/CommonResponse"        
             
-            
+  /api/secure/events/{id}/isAttend:
+    
+    x-swagger-router-controller: Event
+    get:
+     tags:
+      - "Event"
+     operationId: isAttend
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: Event id
+     responses:
+      "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CommonResponse"          
   
   /api/secure/events/{eventId}/wallEntries:
   

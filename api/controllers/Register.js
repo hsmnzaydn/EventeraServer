@@ -11,73 +11,73 @@ module.exports = {registerUser,getEventsCategories};
 function getEventsCategories(req, res, next){
     res.json([{
            
-        "interestId" : "1",
-            "intesrestName" : "Business"
+        "id" : "1",
+            "name" : "Business"
     
       },{
            
-        "interestId" : "2",
-            "intesrestName" : "Sport & Fitness"
+        "id" : "2",
+            "name" : "Sport & Fitness"
     
       },{
            
-        "interestId" : "3",
-            "intesrestName" : "Hobbies"
+        "id" : "3",
+            "name" : "Hobbies"
     
       },{
            
-        "interestId" : "4",
-            "intesrestName" : "Travel & Outdoor"
+        "id" : "4",
+            "name" : "Travel & Outdoor"
     
       },{
            
-        "interestId" : "5",
-            "intesrestName" : "Film & Media"
+        "id" : "5",
+            "name" : "Film & Media"
     
       },{
            
-        "interestId" : "6",
-            "intesrestName" : "Home & Lifestyle"
+        "id" : "6",
+            "name" : "Home & Lifestyle"
     
       },{
            
-        "interestId" : "7",
-            "intesrestName" : "Science & Tech"
+        "id" : "7",
+            "name" : "Science & Tech"
     
       },{
            
-        "interestId" : "8",
-            "intesrestName" : "Fashion"
+        "id" : "8",
+            "name" : "Fashion"
     
       },{
            
-        "interestId" : "9",
-            "intesrestName" : "Health"
+        "id" : "9",
+            "name" : "Health"
     
       },{
            
-        "interestId" : "10",
-            "intesrestName" : "Community"
+        "id" : "10",
+            "name" : "Community"
     
       },{
            
-        "interestId" : "11",
-            "intesrestName" : "Family & Education"
+        "id" : "11",
+            "name" : "Family & Education"
     
       },{
            
-        "interestId" : "12",
-            "intesrestName" : "Spirituality"
+        "id" : "12",
+            "name" : "Spirituality"
     
       },{
            
-        "interestId" : "13",
-            "intesrestName" : "Arts"
+        "id" : "13",
+            "name" : "Arts"
     
       },{
            
-        "interestId" : "14",
-            "intesrestName" : "Others"
+        "id" : "14",
+            "name" : "Others"
     
       }])
      /* category.find(function(err,results){
