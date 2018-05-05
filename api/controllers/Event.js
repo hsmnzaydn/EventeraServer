@@ -94,16 +94,24 @@ function isAttend(req,res,next){
 
 function getEventList(req,res,next){
     var udid=req.headers['udid']
-var authorizationKeyOfUser= req.headers['authorization']
-User.findOne({udid: udid, _id:authorizationKeyOfUser}, function(err,mongoUser){
+   var authorizationKeyOfUser= req.headers['authorization']
+User.findOne({udid: udid}, function(err,mongoUser){
+    if(err){
+        jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+            console.log(err)
+            res.status(callback.code)
+            res.send(callback)
+        })  
+    }
     if(mongoUser){
-
         let listOfInterest =mongoUser.interesting.map(value => value.name)
-        
         etkinlik.find({$or:[{"eventCategoryName":{"$in":listOfInterest}}]},(err,eventList)=>{
             if(err){
-                console.log(err)
-            }
+                jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                    console.log(err)
+                    res.status(callback.code)
+                    res.send(callback)
+                })              }
             if(eventList.length != 0){
                     
                 res.status(Constants.OK_CODE)
@@ -146,7 +154,7 @@ function wallEntryAdd(req,res,next){
                         comment:[]
                         }
                     )
-
+                    
                     event.wallEntryList.push(wallEntry)
 
                     event.save(function(err){
@@ -181,19 +189,40 @@ function wallEntryAdd(req,res,next){
 
 
 function getWallEntries(req,res,next){
-   
+    var udid=req.headers['udid']
+    var authorizationKeyOfUser= req.headers['authorization']
     var id = req.swagger.params.eventId.value
 
     etkinlik.findOne({_id:id},function(err,event){
         if(err){
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                console.log(err)
                 res.status(callback.code)
                 res.send(callback)
             })
         }else{
-           
-           res.status(Constants.OK_CODE)
-           res.send(event.wallEntryList.reverse())
+      
+            if(event.wallEntryList.length != 0){
+            for(var i=0;i<event.wallEntryList.length;i++){
+                let test=event.wallEntryList[i].byLiked.filter(byLiked => byLiked._id.toString() === authorizationKeyOfUser);
+                
+                if(test.length != 0){
+                    event.wallEntryList[i].liked=true
+                }else{
+                    event.wallEntryList[i].liked=false
+                }
+                if(i == event.wallEntryList.length -1){
+                    res.status(Constants.OK_CODE)
+                    res.send(event.wallEntryList.reverse())
+                }
+
+            }
+        }else{
+            res.status(Constants.OK_CODE)
+             res.send(event.wallEntryList.reverse())
+        }
+            
+          
         }
 
     })

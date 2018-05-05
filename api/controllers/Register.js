@@ -12,7 +12,7 @@ function getEventsCategories(req, res, next){
     res.json([{
            
         "id" : "1",
-            "name" : "Business"
+            "name" : "Business & Professional"
     
       },{
            
@@ -42,7 +42,7 @@ function getEventsCategories(req, res, next){
       },{
            
         "id" : "7",
-            "name" : "Science & Tech"
+            "name" : "Science & Technology"
     
       },{
            
@@ -66,10 +66,11 @@ function getEventsCategories(req, res, next){
     
       },{
            
-        "id" : "12",
-            "name" : "Spirituality"
+        "id" : "15",
+            "name" : "Music"
     
-      },{
+      },
+      {
            
         "id" : "13",
             "name" : "Arts"
@@ -77,7 +78,7 @@ function getEventsCategories(req, res, next){
       },{
            
         "id" : "14",
-            "name" : "Others"
+            "name" : "Other"
     
       }])
      /* category.find(function(err,results){

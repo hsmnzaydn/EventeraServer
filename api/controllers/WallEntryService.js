@@ -9,7 +9,7 @@ var CommentSchema=require('../mocks/models/CommentSchema')
 
 let commentCount=0;
 
-module.exports={postComment,getComment}
+module.exports={postComment,getComment,likeToWallEntry}
 
 
 function postComment(req,res,next){
@@ -70,6 +70,93 @@ function postComment(req,res,next){
 
  } 
 
+    })
+}
+
+
+function likeToWallEntry(req,res,next){
+    var udid=req.headers['udid']
+    var authorizationKeyOfUser= req.headers['authorization']
+    var eventId = req.swagger.params.eventId.value
+    var wallEntryId = req.swagger.params.wallEntryId.value
+
+    EventSchema.findOne({_id:eventId},function(err,event){
+        if(err){
+            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                res.status(callback.code)
+                res.send(callback)
+            })
+       }else{
+        if(event){
+            event.wallEntryList.filter(function(wallEntry,index){
+                if(wallEntry._id.toString() == wallEntryId){
+                       UserSchema.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+                        if(err){
+                            console.log(err)
+                            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                                res.status(callback.code)
+                                res.send(callback)
+                            })
+                       }else{
+
+                        let entry=new WallEntrySchema({
+                            _id: event.wallEntryList[index]._id
+                           
+                        })
+
+                        entry=wallEntry
+                        let byLiked=entry.byLiked.filter(byLiked => byLiked._id.toString() === authorizationKeyOfUser);
+                        if(byLiked.length != 0){
+                                    entry.likeCount=entry.likeCount-1
+                                    entry.byLiked.splice(index,1)
+                                    event.wallEntryList.splice(index,1)
+                                    event.wallEntryList.push(entry)
+                                    event.save(function(err){
+                                        if(err){
+                                            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                                                res.status(callback.code)
+                                                res.send(callback)
+                                            })
+                                       }else{
+                                       
+                                            jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                                                res.status(callback.code)
+                                                res.send(callback)
+                                            })
+                                       
+                                       } 
+                                    })
+                                
+                        }else{
+                        entry.likeCount=entry.likeCount+1
+                        entry.byLiked.push(user)
+                        event.wallEntryList.splice(index,1)
+                        event.wallEntryList.push(entry)
+                        event.save(function(err){
+                            if(err){
+                                jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                                    res.status(callback.code)
+                                    res.send(callback)
+                                })
+                           }else{
+                           
+                                jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
+                                    res.status(callback.code)
+                                    res.send(callback)
+                                })
+                           
+                           } 
+                        })
+                    }
+
+
+                     }
+                     }) 
+                }
+            }) 
+
+        }
+       }
     })
 }
 

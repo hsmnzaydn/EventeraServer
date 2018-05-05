@@ -253,7 +253,40 @@ paths:
             $ref: "#/definitions/WallEntry"
    
        
-  
+  /api/secure/events/{eventId}/wallEntry/{wallEntryId}/like:
+    
+    x-swagger-router-controller: WallEntryService
+    get:
+     tags:
+      - "Wall Entry"
+     operationId: likeToWallEntry
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: wallEntryId
+        in: path
+        description: Wall entry id
+        type: string
+        required: true
+      - name: eventId
+        in: path
+        type: string
+        required: true
+        description: Event id  
+     responses:
+      "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
+
+    
     
   /api/secure/events/{eventId}/wallEntry/{wallEntryId}/comments:
     
