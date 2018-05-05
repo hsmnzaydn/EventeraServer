@@ -419,6 +419,9 @@ definitions:
     properties:
      text:
       type: string
+     user:
+      $ref : "#/definitions/RegisterObject"
+        
     
   
   

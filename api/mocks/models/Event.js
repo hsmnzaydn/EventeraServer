@@ -16,9 +16,7 @@ var event=new Schema(
         eventEndTime:String,
         eventCategoryName: String,
         eventLocation: String,
-        wallEntryList: [
-            
-        ]
+        wallEntryList: {type:Array}
         
     }
 

@@ -64,7 +64,7 @@ function isAttend(req,res,next){
                         res.send(callback)
                     })  
                 }else{
-                    let result= user.attendes.filter(attend => attend.eventName === event.eventName);
+                    let result= user.attendes.filter(attend => attend._id.toString() === id);
                     if(result.length != 0){
                         jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
                             res.status(callback.code)
@@ -141,7 +141,9 @@ function wallEntryAdd(req,res,next){
                    
                     var wallEntry= new WallEntrySchema({
                         postedBy:user,
-                        text: req.body['text']
+                        text: req.body['text'],
+                        eventId:event._id,
+                        comment:[]
                         }
                     )
 
@@ -191,7 +193,7 @@ function getWallEntries(req,res,next){
         }else{
            
            res.status(Constants.OK_CODE)
-           res.send(event.wallEntryList)
+           res.send(event.wallEntryList.reverse())
         }
 
     })
