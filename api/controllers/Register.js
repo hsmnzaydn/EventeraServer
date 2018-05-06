@@ -81,20 +81,7 @@ function getEventsCategories(req, res, next){
             "name" : "Other"
     
       }])
-     /* category.find(function(err,results){
-        if(err) {
-            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                res.status(callback.code)
-                res.send(callback)
-            });
-        }else{
-            jsonCreator.commonResponseCreator(Constants.OK_CODE,Constants.OK_MESSAGE,function(callback){
-                console.log(results);
-                res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify(results));
-            });
-        }
-      })*/
+     
 }
 
 

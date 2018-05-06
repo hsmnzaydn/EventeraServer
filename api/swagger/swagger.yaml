@@ -27,6 +27,8 @@ tags:
   description: "Events' services"
 - name: "Wall Entry"
   description: "Wall Entry services"
+- name: "Profile"
+  description: "Profile services"
 paths:
 
   
@@ -359,7 +361,35 @@ paths:
             items:
              $ref: "#/definitions/Comment"          
   
-
+  /api/secure/profile/{profileId}:
+    
+    
+    x-swagger-router-controller: ProfileService
+    get:
+     tags:
+      - "Profile"
+     operationId: getProfile
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: profileId
+        in: path
+        type: string
+        required: true
+        description: Event id
+      
+     responses:
+      "200":
+       description: Success
+       schema:
+         $ref: "#/definitions/RegisterObject"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

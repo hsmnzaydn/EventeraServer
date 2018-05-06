@@ -76,7 +76,8 @@ function isAttend(req,res,next){
                             res.send(callback)
                         })
                     }
-                }
+             
+            }
             })
            
 
@@ -108,7 +109,6 @@ User.findOne({udid: udid}, function(err,mongoUser){
         etkinlik.find({$or:[{"eventCategoryName":{"$in":listOfInterest}}]},(err,eventList)=>{
             if(err){
                 jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                    console.log(err)
                     res.status(callback.code)
                     res.send(callback)
                 })              }
