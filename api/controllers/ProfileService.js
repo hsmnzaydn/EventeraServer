@@ -12,7 +12,7 @@ function getProfile(req,res,next){
     var authorizationKeyOfUser= req.headers['authorization']
     var profileId=req.swagger.params.profileId.value
 
-    UserSchema.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+    UserSchema.findOne({udid:udid},function(err,user){
 
         if(err){
             console.log(err)
@@ -55,7 +55,7 @@ function updateProfile(req,res,next){
     var interesting=req.body['interests']
 
 
-    UserSchema.findOne({udid:udid,_id:authorizationKeyOfUser},function(err,user){
+    UserSchema.findOne({udid:udid},function(err,user){
         if(err){
             console.log(err)
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
