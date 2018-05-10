@@ -125,7 +125,7 @@ paths:
         in: header
         description: User's authorization
         required: false
-        type: string    
+        type: string
      responses:
       "200":
        description: response
@@ -390,6 +390,38 @@ paths:
        description: Success
        schema:
          $ref: "#/definitions/RegisterObject"
+         
+  /api/secure/profile/{profileId}/update:
+    x-swagger-router-controller: ProfileService
+    post:
+     tags:
+      - "Profile"
+     operationId: updateProfile
+     parameters:
+      - name: udid
+        in: header
+        description: User's udid
+        type: string
+      - name: Authorization
+        in: header
+        description: User's authorization
+        required: false
+        type: string
+      - name: profileId
+        in: path
+        type: string
+        required: true
+        description: Profile id
+      - name: registerObject
+        in: body
+        required: true
+        schema:
+         $ref: "#/definitions/RegisterObject"
+     responses:
+      "200":
+       description: Success
+       schema:
+         $ref: "#/definitions/CommonResponse"      
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
