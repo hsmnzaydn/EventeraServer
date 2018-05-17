@@ -12,7 +12,7 @@ var kullanici=new Schema(
         age: String,
         mail: String,
         interesting: {type: Array},
-        attendes: {type: Array}
+        attendes: {type: Array, default: null}
     }
 
 );

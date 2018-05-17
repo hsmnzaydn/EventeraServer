@@ -19,16 +19,22 @@ var CsvReadableStream = require('csv-reader');
                eventLocation: row[5]
     
             })
-            
-            etkinlik.save(function(err) {
-                if (err) {
-                    jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                        res.status(callback.code)
-                        res.send(callback)
+
+            event.findOne({eventName:etkinlik.eventName.toString()},function(err,event){
+                if(!event){
+                    etkinlik.save(function(err) {
+                        if (err) {
+                            jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
+                                res.status(callback.code)
+                                res.send(callback)
+                            });
+                        }
+                        
                     });
                 }
-                
-            });
+            })
+            
+          
             
         })
         .on('end', function (data) {
