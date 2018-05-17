@@ -10,7 +10,7 @@ var wallEntry= new Schema({
     eventId: String,
     text: String,
     likeCount: {type: Number, default: 0},
-    liked: Boolean,
+    liked: {type:Boolean,default: false},
     byLiked:[
         {
                 Object

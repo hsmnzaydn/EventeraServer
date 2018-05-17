@@ -202,7 +202,20 @@ function getWallEntries(req,res,next){
             })
         }else{
       
-            if(event.wallEntryList.length != 0){
+             let test=event.wallEntryList.filter(function(wallEntry,index){
+                 let isLiked=wallEntry.byLiked.filter(function(person,likedIndex){
+                     if(person._id==authorizationKeyOfUser){
+                        wallEntry.liked=true
+                     }
+                 })
+
+                 if(index == event.wallEntryList.length -1){
+                    res.status(Constants.OK_CODE)
+                    res.send(event.wallEntryList.reverse())
+                 }
+             })
+
+         /*   if(event.wallEntryList.length != 0){
             for(var i=0;i<event.wallEntryList.length;i++){
                 let test=event.wallEntryList[i].byLiked.filter(byLiked => byLiked._id.toString() === authorizationKeyOfUser);
                 
@@ -220,7 +233,7 @@ function getWallEntries(req,res,next){
         }else{
             res.status(Constants.OK_CODE)
              res.send(event.wallEntryList.reverse())
-        }
+        }*/
             
           
         }
