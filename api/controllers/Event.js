@@ -15,7 +15,7 @@ function attendEvent(req,res,next){
     var udid = req.headers['udid']
     var authorizationKeyOfUser= req.headers['authorization']
     
-    UserSchema.findById({_id:authorizationKeyOfUser , udid: udid},function(err,mongoUser){
+    UserSchema.findById({udid: udid},function(err,mongoUser){
 
         etkinlik.findById({_id:id},function(err,event){
             mongoUser.attendes.push(event)
@@ -145,7 +145,7 @@ function wallEntryAdd(req,res,next){
                 res.send(callback)
             })
         }else{
-            UserSchema.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+            UserSchema.findOne({udid:udid},function(err,user){
                 if(err){
                     jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                         res.status(callback.code)

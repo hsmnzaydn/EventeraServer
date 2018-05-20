@@ -27,7 +27,7 @@ function postComment(req,res,next){
             })
         }else{
              Utils.searchInArray(wallEntryId,event.wallEntryList,function(callback){
-                UserSchema.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+                UserSchema.findOne({udid:udid},function(err,user){
                     if(err){
                         console.log(err)
                         jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
@@ -90,7 +90,7 @@ function likeToWallEntry(req,res,next){
         if(event){
             event.wallEntryList.filter(function(wallEntry,index){
                 if(wallEntry._id.toString() == wallEntryId){
-                       UserSchema.findOne({_id:authorizationKeyOfUser,udid:udid},function(err,user){
+                       UserSchema.findOne({udid:udid},function(err,user){
                         if(err){
                             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
                                 res.status(callback.code)
