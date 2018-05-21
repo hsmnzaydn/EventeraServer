@@ -15,7 +15,7 @@ function attendEvent(req,res,next){
     var udid = req.headers['udid']
     var authorizationKeyOfUser= req.headers['authorization']
     
-    UserSchema.findById({udid: udid},function(err,mongoUser){
+    UserSchema.findOne({udid: udid},function(err,mongoUser){
 
         etkinlik.findById({_id:id},function(err,event){
             mongoUser.attendes.push(event)
