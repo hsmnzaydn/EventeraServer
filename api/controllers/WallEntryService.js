@@ -104,12 +104,12 @@ function likeToWallEntry(req,res,next){
                         })
 
                         entry=wallEntry
-                       let byLiked=entry.byLiked.filter(byLiked => byLiked._id.toString() === authorizationKeyOfUser);
+                       let byLiked=entry.byLiked.filter(byLiked => byLiked.udid.toString() === udid);
                    
                       
                       if(byLiked.length != 0){
                                     for (var a=0 ; a< byLiked.length;a++){
-                                        if(byLiked[a]._id== authorizationKeyOfUser){
+                                        if(byLiked[a].udid== udid){
                                             entry.likeCount=entry.likeCount-1
                                             entry.byLiked.splice(a,1)
                                             event.wallEntryList.splice(index,1)
@@ -187,8 +187,6 @@ function getComment(req,res,next){
                     if(wallEntry._id.toString() == wallEntryId){
                         res.status(Constants.OK_CODE)
                         res.send(wallEntry.comment.reverse())
-                    }else{
-                        console.log("Başarısız")
                     }
                 }) 
 

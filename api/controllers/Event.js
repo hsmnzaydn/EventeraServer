@@ -203,15 +203,14 @@ function getWallEntries(req,res,next){
     etkinlik.findOne({_id:id},function(err,event){
         if(err){
             jsonCreator.commonResponseCreator(Constants.ERROR_CODE,Constants.ERROR_MESSAGE,function(callback){
-                console.log(err)
                 res.status(callback.code)
                 res.send(callback)
             })
         }else{
             if(event.wallEntryList.length != 0){
-             let test=event.wallEntryList.filter(function(wallEntry,index){
+             event.wallEntryList.filter(function(wallEntry,index){
                  let isLiked=wallEntry.byLiked.filter(function(person,likedIndex){
-                     if(person._id==authorizationKeyOfUser){
+                     if(person.udid.toString()==udid){
                         wallEntry.liked=true
                      }else{
                         wallEntry.liked=false
